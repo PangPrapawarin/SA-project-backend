@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Bill extends Model
 {
     use HasFactory;
+    protected $table = 'bills';
+
+    protected $fillable = [
+        'paid_date',
+    ];
+
+    public function invoice() {
+        return $this->belongsTo(Invoice::class);
+    }
 }
