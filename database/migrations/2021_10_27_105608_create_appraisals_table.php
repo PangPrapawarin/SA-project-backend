@@ -17,6 +17,7 @@ class CreateAppraisalsTable extends Migration
             $table->id();
             $table->integer('price');
             $table->string('appraisal_status')->default('waiting confirm');
+            $table->text('detail');
             $table->foreign('serial_number')
                 ->references('serial_number')
                 ->on('warranties');

@@ -14,8 +14,10 @@ class AppraisalController extends Controller
     {
         $price = $request->input('price');
         $appraisal_status = $request->input('appraisal_status');
-        $serial_number = Warranty::find($request->input('serial_number'));
-        if ($serial_number !== null) {
+        $detail = $request->input('detail');
+        $serialNumber = Warranty::find('serial_number');
+        if ($serialNumber !== null) {
+            $serial_number = Warranty::find($request->input('serial_number'));
             $warranty_start_date = Warranty::find($request->input('warranty_start_date'));
             $warranty_end_date = Warranty::find($request->input('warranty_end_date'));
             $product_name = Warranty::find($request->input('product_name'));
@@ -23,6 +25,7 @@ class AppraisalController extends Controller
             Appraisal::create([
                 'price' => $price,
                 'appraisal_status' => $appraisal_status,
+                'detail' => $detail,
                 'serial_number' => $serial_number,
                 'warranty_start_date' => $warranty_start_date,
                 'warranty_end_date' => $warranty_end_date,

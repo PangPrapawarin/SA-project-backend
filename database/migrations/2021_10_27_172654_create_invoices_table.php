@@ -17,7 +17,7 @@ class CreateInvoicesTable extends Migration
             $table->id();
             $table->date('date_of_repair');
             $table->timestamps('start_fix');
-            $table->timestamps('start_fix');
+            $table->timestamps('end_fix');
             $table->string('invoice_status')->default('in progress');
             $table->foreign('employee_name')
             ->references('name')
