@@ -12,6 +12,8 @@ class Bill extends Model
 
     protected $fillable = [
         'paid_date',
+        'time_total',
+        'bill_status'
     ];
 
     public function invoice() {

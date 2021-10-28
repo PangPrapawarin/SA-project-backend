@@ -15,7 +15,15 @@ class CreateBillsTable extends Migration
     {
         Schema::create('bills', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->timestamps('paid_date');
+            $table->integer('time_total');
+            $table->string('bill_status')->default('waiting to pay');
+            $table->foreign('date_of_repair')
+            ->references('date_of_repair')
+            ->on('invoices');
+            $table->foreign('employee_name')
+            ->references('employee_name')
+            ->on('invoices');
         });
     }
 

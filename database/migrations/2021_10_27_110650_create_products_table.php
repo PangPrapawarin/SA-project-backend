@@ -14,7 +14,7 @@ class CreateProductsTable extends Migration
     public function up()
     {
         Schema::create('products', function (Blueprint $table) {
-            $table->string('serial_number')->primary();
+            $table->string('serial_number')->unique();
             $table->string('model');
             $table->string('color');
             $table->string('product_name');
