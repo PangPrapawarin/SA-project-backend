@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AppraisalController;
+use App\Http\Controllers\Api\BillController;
 use App\Http\Controllers\Api\InvoiceController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
@@ -39,3 +40,7 @@ Route::post('/invoice/create-work', [InvoiceController::class], 'create');
 Route::post('/invoice/update-status', [InvoiceController::class], 'updateStatusWork');
 
 //Bill route
+Route::get('/bill/paid/{id}', [BillController::class, 'showPaidOnly']);
+Route::get('/bill/total-time/{id}', [BillController::class], 'totalTime');
+Route::post('/bill/not-paid/{id}', [BillController::class], 'showBeforePay');
+Route::post('/bill/status-bill/{id}', [BillController::class], 'updateStatusBill');
