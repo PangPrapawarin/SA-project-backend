@@ -12,7 +12,8 @@ class Appraisal extends Model
 
     protected $fillable = [
         'price',
-        'appraisal_status'
+        'appraisal_status',
+        'detail'
     ];
 
     public function invoice() {
