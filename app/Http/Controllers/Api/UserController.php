@@ -9,15 +9,9 @@ use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function createUser(Request $request)
+    public function create(Request $request)
     {
-        $employee = User::create([
+        User::create([
             'address' => $request->input('address'),
             'sex' => $request->input('sex'),
             'salary' => $request->input('salary'),
@@ -27,12 +21,6 @@ class UserController extends Controller
         return 'success';
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
     public function show()
     {
         $users = DB::table('users')->get();
@@ -45,25 +33,7 @@ class UserController extends Controller
         return $user;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
     public function edit(User $user)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, User $user)
     {
         //
     }

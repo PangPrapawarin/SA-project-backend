@@ -4,83 +4,64 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Appraisal;
+use App\Models\Warranty;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AppraisalController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function create(Request $request)
     {
-        //
+        $price = $request->input('price');
+        $appraisal_status = $request->input('appraisal_status');
+        $serial_number = Warranty::find($request->input('serial_number'));
+        if ($serial_number !== null) {
+            $warranty_start_date = Warranty::find($request->input('warranty_start_date'));
+            $warranty_end_date = Warranty::find($request->input('warranty_end_date'));
+            $product_name = Warranty::find($request->input('product_name'));
+
+            Appraisal::create([
+                'price' => $price,
+                'appraisal_status' => $appraisal_status,
+                'serial_number' => $serial_number,
+                'warranty_start_date' => $warranty_start_date,
+                'warranty_end_date' => $warranty_end_date,
+                'product_name' => $product_name
+            ]);
+            return 'success';
+        }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function showWaitingWork()
     {
-        //
+        $appraisal = DB::table('appraisals')
+                        ->crossJoin('warranties')
+                        ->where('appraisal_status', '=', 'waiting confirm')
+                        ->get();
+        return response()->json($appraisal);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function showConfirmWork()
     {
-        //
+        $appraisal = DB::table('appraisals')
+                        ->crossJoin('warranties')
+                        ->where('appraisal_status', '=', 'confirmed')
+                        ->get();
+        return response()->json($appraisal);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Appraisal  $appraisal
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Appraisal $appraisal)
-    {
-        //
-    }
+    public function updateStatusAppraisal(Request $request, $id){
+        $appraisal = Appraisal::findOrFail($id);
+        $appraisal->appraisal_status = $request->input('appraisal_status');
+        $appraisal->save();
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Appraisal  $appraisal
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Appraisal $appraisal)
-    {
-        //
-    }
+        // if ($appraisal->status == 'confirmed'){
+        //     $sql_appraisal_type = $appraisal->type."_left";
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Appraisal  $appraisal
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Appraisal $appraisal)
-    {
-        //
-    }
+        //     DB::update("update work set ".$sql_appraisal_type." = ".$sql_appraisal_type. "- ".$appraisal->appraisal_status." where serial number = ".$appraisal->serial_number);
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Appraisal  $appraisal
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Appraisal $appraisal)
-    {
-        //
+        // }
+        
+        return "update success";
     }
 }
