@@ -18,15 +18,16 @@ class CreateInvoicesTable extends Migration
             $table->date('date_of_repair');
             $table->timestamps('start_fix');
             $table->timestamps('start_fix');
+            $table->string('invoice_status')->default('in progress');
             $table->foreign('employee_name')
             ->references('name')
             ->on('users');
-            $table->foreign('customer_name')
-            ->references('customer_name')
-            ->on('warranties');
             $table->foreign('employee_id')
             ->references('id')
             ->on('users');
+            $table->foreign('product_name')
+            ->references('product_name')
+            ->on('appraisals');
         });
     }
 

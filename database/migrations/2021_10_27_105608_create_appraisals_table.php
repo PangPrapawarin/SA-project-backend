@@ -16,7 +16,7 @@ class CreateAppraisalsTable extends Migration
         Schema::create('appraisals', function (Blueprint $table) {
             $table->id();
             $table->integer('price');
-            $table->string('status')->default('in progress');
+            $table->string('appraisal_status')->default('waiting confirm');
             $table->foreign('serial_number')
                 ->references('serial_number')
                 ->on('warranties');
@@ -25,6 +25,9 @@ class CreateAppraisalsTable extends Migration
                 ->on('warranties');
             $table->foreign('warranty_end_date')
                 ->references('warranty_end_date')
+                ->on('warranties');
+            $table->foreign('product_name')
+                ->references('product_name')
                 ->on('warranties');
         });
     }

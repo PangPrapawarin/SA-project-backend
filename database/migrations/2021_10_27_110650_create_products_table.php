@@ -17,6 +17,7 @@ class CreateProductsTable extends Migration
             $table->string('serial_number')->primary();
             $table->string('model');
             $table->string('color');
+            $table->string('product_name');
         });
     }
 

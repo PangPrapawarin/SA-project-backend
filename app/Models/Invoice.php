@@ -13,7 +13,8 @@ class Invoice extends Model
     protected $fillable = [
         'date_of_repair',
         'start_fix',
-        'end_fix'
+        'end_fix',
+        'invoice_status'
     ];
 
     public function bill() {

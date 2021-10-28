@@ -26,6 +26,9 @@ class CreateWarrantiesTable extends Migration
             $table->foreign('serial_number')
                 ->references('serial_number')
                 ->on('products');
+            $table->foreign('product_name')
+                ->references('product_name')
+                ->on('products');
         });
     }
 
