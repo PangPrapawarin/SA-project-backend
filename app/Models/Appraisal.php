@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Appraisal extends Model
 {
     use HasFactory;
-    protected $table = 'appraisal';
+    protected $table = 'appraisals';
 
     protected $fillable = [
         'price',

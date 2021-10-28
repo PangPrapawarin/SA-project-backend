@@ -37,3 +37,5 @@ Route::post('/appraisal/update-status', [AppraisalController::class, 'updateStat
 Route::get('/invoice/all-works', [InvoiceController::class, 'show']);
 Route::post('/invoice/create-work', [InvoiceController::class], 'create');
 Route::post('/invoice/update-status', [InvoiceController::class], 'updateStatusWork');
+
+//Bill route
