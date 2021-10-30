@@ -19,17 +19,15 @@ class CreateInvoicesTable extends Migration
             $table->dateTime('start_fix');
             $table->dateTime('end_fix');
             $table->string('invoice_status')->default('in progress');
-            $table->foreign('employee_name')
-            ->constrained()
-            ->references('name')
-            ->on('users');
+
+            $table->unsignedBigInteger('employee_id');
             $table->foreign('employee_id')
-            ->constrained()
             ->references('id')
             ->on('users');
-            $table->foreign('product_name')
-            ->constrained()
-            ->references('product_name')
+
+            $table->unsignedBigInteger('appraisals_id');
+            $table->foreign('appraisals_id')
+            ->references('id')
             ->on('appraisals');
         });
     }

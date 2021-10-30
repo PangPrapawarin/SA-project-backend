@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Warranty;
 
 class Product extends Model
 {
@@ -17,6 +18,6 @@ class Product extends Model
     ];
 
     public function warranty() {
-        return $this->hasMany(Warranty::class);
+        return $this->belongsTo(Warranty::class);
     }
 }

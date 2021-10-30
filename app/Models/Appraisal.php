@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Bill;
+use App\Models\Invoice;
 
 class Appraisal extends Model
 {
@@ -17,9 +19,9 @@ class Appraisal extends Model
     ];
 
     public function invoice() {
-        return $this->hasMany(Invoice::class);
+        return $this->belongsTo(Invoice::class);
     }
     public function warranty() {
-        return $this->belongsTo(Warranty::class);
+        return $this->hasOne(Warranty::class);
     }
 }
