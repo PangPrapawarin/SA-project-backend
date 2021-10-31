@@ -43,13 +43,6 @@ class InvoiceController extends Controller
         $invoice = Invoice::findOrFail($id);
         $invoice->invoice_status = $request->input('invoice_status');
         $invoice->save();
-
-        // if ($invoice->invoice_status == 'finished'){
-        //     $sql_invoice_type = $invoice->type."_left";
-
-        //     DB::update("update work set ".$sql_invoice_type." = ".$sql_invoice_type. "- ".$invoice->invoice_status." where serial number = ".$invoice->serial_number);
-
-        // }
         
         return "update success";
     }

@@ -14,15 +14,18 @@ class CreateWarrantiesTable extends Migration
     public function up()
     {
         Schema::create('warranties', function (Blueprint $table) {
+            $table->id();
             $table->dateTime('warranty_start_date');
             $table->dateTime('warranty_end_date');
             $table->string('customer_name');
             
-            $table->string('serial_number');
-            $table->foreign('serial_number')
-                ->references('serial_number')
+            $table->string('product_id');
+            $table->foreign('product_id')
+                ->references('id')
                 ->on('products')
                 ->cascadeOnDelete();
+                
+            $table->timestamps();
         });
     }
 

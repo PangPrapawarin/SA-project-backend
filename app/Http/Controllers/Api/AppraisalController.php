@@ -10,47 +10,40 @@ use Illuminate\Support\Facades\DB;
 
 class AppraisalController extends Controller
 {
-    public function create(Request $request)
+    public function create(Request $request, $warranties_id)
     {
         $price = $request->input('price');
-        $appraisal_status = $request->input('appraisal_status');
         $detail = $request->input('detail');
-        $serialNumber = Warranty::find('serial_number');
-        if ($serialNumber !== null) {
-            $serial_number = Warranty::find($request->input('serial_number'));
-            $warranty_start_date = Warranty::find($request->input('warranty_start_date'));
-            $warranty_end_date = Warranty::find($request->input('warranty_end_date'));
-            $product_name = Warranty::find($request->input('product_name'));
 
             Appraisal::create([
                 'price' => $price,
-                'appraisal_status' => $appraisal_status,
                 'detail' => $detail,
-                'serial_number' => $serial_number,
-                'warranty_start_date' => $warranty_start_date,
-                'warranty_end_date' => $warranty_end_date,
-                'product_name' => $product_name
+                'warranties_id' => $warranties_id,
             ]);
             return 'success';
-        }
+       // }
     }
 
     public function showWaitingWork()
     {
         $appraisal = DB::table('appraisals')
-                        ->crossJoin('warranties')
                         ->where('appraisal_status', '=', 'waiting confirm')
+                        //เวลาเรียกผ่านตัวแปรอื่นใน warraties ใช้ warranties_id น้า 
                         ->get();
-        return response()->json($appraisal);
+        return response()->json(array(
+            'data' => $appraisal
+        ));
     }
 
     public function showConfirmWork()
     {
         $appraisal = DB::table('appraisals')
-                        ->crossJoin('warranties')
                         ->where('appraisal_status', '=', 'confirmed')
+                        //เวลาเรียกเรียกผ่านตัวแปรอื่นใน warraties ใช้ warranties_id น้า 
                         ->get();
-        return response()->json($appraisal);
+        return response()->json(array(
+            'data' => $appraisal
+        ));
     }
 
     public function updateStatusAppraisal(Request $request, $id){
@@ -58,13 +51,6 @@ class AppraisalController extends Controller
         $appraisal->appraisal_status = $request->input('appraisal_status');
         $appraisal->save();
 
-        // if ($appraisal->status == 'confirmed'){
-        //     $sql_appraisal_type = $appraisal->type."_left";
-
-        //     DB::update("update work set ".$sql_appraisal_type." = ".$sql_appraisal_type. "- ".$appraisal->appraisal_status." where serial number = ".$appraisal->serial_number);
-
-        // }
-        
         return "update success";
     }
 }

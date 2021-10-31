@@ -31,8 +31,8 @@ Route::post('/user/remove-employee', [UserController::class], 'destroy');
 //Appraisal route
 Route::get('/appraisal/waiting', [AppraisalController::class, 'showWaitingWork']);
 Route::get('/appraisal/confirmed', [AppraisalController::class, 'showConfirmWork']);
-Route::post('/appraisal/create-appraisal', [AppraisalController::class, 'create']);
-Route::post('/appraisal/update-status', [AppraisalController::class, 'updateStatusAppraisal']);
+Route::post('/appraisal/create-appraisal/{id}', [AppraisalController::class, 'create']);
+Route::post('/appraisal/update-status/{id}', [AppraisalController::class, 'updateStatusAppraisal']);
 
 //Invoice route
 Route::get('/invoice/all-works', [InvoiceController::class, 'show']);
@@ -41,6 +41,6 @@ Route::post('/invoice/update-status', [InvoiceController::class], 'updateStatusW
 
 //Bill route
 Route::get('/bill/paid/{id}', [BillController::class, 'showPaidOnly']);
-Route::get('/bill/total-time/{id}', [BillController::class], 'totalTime');
+Route::get('/bill/total-time', [BillController::class], 'totalTime');
 Route::post('/bill/not-paid/{id}', [BillController::class], 'showBeforePay');
 Route::post('/bill/status-bill/{id}', [BillController::class], 'updateStatusBill');

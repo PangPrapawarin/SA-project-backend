@@ -15,6 +15,7 @@ class CreateInvoicesTable extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
+            $table->timestamps();
             $table->date('date_of_repair');
             $table->dateTime('start_fix');
             $table->dateTime('end_fix');
@@ -23,12 +24,14 @@ class CreateInvoicesTable extends Migration
             $table->unsignedBigInteger('employee_id');
             $table->foreign('employee_id')
             ->references('id')
-            ->on('users');
+            ->on('users')
+            ->cascadeOnDelete();
 
             $table->unsignedBigInteger('appraisals_id');
             $table->foreign('appraisals_id')
             ->references('id')
-            ->on('appraisals');
+            ->on('appraisals')
+            ->cascadeOnDelete();
         });
     }
 

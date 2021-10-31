@@ -17,16 +17,18 @@ class Invoice extends Model
         'date_of_repair',
         'start_fix',
         'end_fix',
-        'invoice_status'
+        'invoice_status',
+        'employee_id',
+        'appraisals_id'
     ];
 
-    public function bill() {
-        return $this->belongsTo(Bill::class);
-    }
+    // public function bill() {
+    //     return $this->hasOne(Bill::class);
+    // }
     public function appraisal() {
-        return $this->hasOne(Appraisal::class);
+        return $this->belongsTo(Appraisal::class);
     }
     public function user(){
-        return $this->hasMany(User::class);
+        return $this->belongsTo(User::class);
     }
 }

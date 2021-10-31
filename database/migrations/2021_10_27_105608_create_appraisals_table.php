@@ -18,10 +18,14 @@ class CreateAppraisalsTable extends Migration
             $table->integer('price');
             $table->string('appraisal_status')->default('waiting confirm');
             $table->text('detail');
-            $table->string('serial_number');
-            $table->foreign('serial_number')
-                ->references('serial_number')
-                ->on('warranties');
+            
+            $table->unsignedBigInteger('warranties_id');
+            $table->foreign('warranties_id')
+                ->references('id')
+                ->on('warranties')
+                ->cascadeOnDelete();
+
+            $table->timestamps();
         });
     }
 

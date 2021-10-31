@@ -15,11 +15,13 @@ class CreateBillsTable extends Migration
     {
         Schema::create('bills', function (Blueprint $table) {
             $table->id();
+            $table->timestamps();
 
             $table->unsignedBigInteger('invoices_id');
             $table->foreign('invoices_id')
             ->references('id')
-            ->on('invoices');
+            ->on('invoices')
+            ->cascadeOnDelete();
 
             $table->date('paid_date');
             $table->integer('time_total');
