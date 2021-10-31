@@ -11,19 +11,15 @@ use Illuminate\Support\Facades\DB;
 
 class InvoiceController extends Controller
 {
-    public function create(Request $request)
+    public function create(Request $request, $employee_id, $appraisal_id)
     {
-        $employee_name = User::find($request->input('employee_name'));
-        $employee_id = User::find($request->input('employee_id'));
-        $product_name = Appraisal::find($request->input('product_name'));
         Invoice::create([
-            'employee_name' => $employee_name,
-            'employee_id' => $employee_id,
-            'product_name' => $product_name,
             'date_of_repair' => $request->input('date_of_repair'),
             'start_fix' => $request->input('start_fix'),
             'end_fix' => $request->input('end_fix'),
-            'invoice_status' => $request->input('invoice_status')
+            'invoice_status' => $request->input('invoice_status'),
+            'employee_id' => $employee_id,
+            'appraisal_id' => $appraisal_id
         ]);
         return 'success';
     }

@@ -3,84 +3,37 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use App\Models\Warranty;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class WarrantyController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function create(Request $request, $product_id)
     {
-        //
+        Product::findOrFail($product_id);
+            Warranty::create([
+                'warranty_start_date' => $request->input('warranty_start_date'),
+                'warranty_end_date' => $request->input('warranty_end_date'),
+                'customer_name' => $request->input('customer_name'),
+                'product_id' => $product_id
+            ]);
+            return 'success';
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function getWarranty($serial_number) 
     {
-        //
+        $warranty = DB::table('warranties')
+                    ->where('serial_number', '=', $serial_number)
+                    ->get();
+        return $warranty;
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function destroy(Request $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Warranty  $warranty
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Warranty $warranty)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Warranty  $warranty
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Warranty $warranty)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Warranty  $warranty
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Warranty $warranty)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Warranty  $warranty
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Warranty $warranty)
-    {
-        //
+        $warranty = Warranty::find($request->input('serial_number'));
+        $warranty->delete();
+        return "remove success";
     }
 }

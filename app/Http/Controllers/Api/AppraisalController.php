@@ -10,18 +10,17 @@ use Illuminate\Support\Facades\DB;
 
 class AppraisalController extends Controller
 {
-    public function create(Request $request, $warranties_id)
+    public function create(Request $request, $warranty_id)
     {
         $price = $request->input('price');
         $detail = $request->input('detail');
-
+        Warranty::findOrFail($warranty_id);
             Appraisal::create([
                 'price' => $price,
                 'detail' => $detail,
-                'warranties_id' => $warranties_id,
+                'warranties_id' => $warranty_id,
             ]);
             return 'success';
-       // }
     }
 
     public function showWaitingWork()

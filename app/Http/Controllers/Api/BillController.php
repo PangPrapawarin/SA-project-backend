@@ -15,33 +15,42 @@ class BillController extends Controller
     //     $this->middleware('auth:api');    
     // }
 
-    public function totalTime()
+    public function create(Request $request, $invoice_id)
     {
-        // $time_total = Invoice::findOrFail($id);
-        $time_total = DB::table('invoices')
-                        // ->where('id', '=', $id)
-                        ->get();
-        //เวลาเรียกผ่านตัวแปรอื่นใน invoices ใช้ invoices_id น้า 
-        return response()->json($time_total);
-    }
-
-    public function showBeforePay(Request $request, $invoices_id)
-    {
-        $invoice = Invoice::findOrFail($invoices_id);
-        //เวลาเรียกผ่านตัวแปรอื่นใน invoices ใช้ invoices_id น้า 
+        Invoice::findOrFail($invoice_id);
         $bill = Bill::create([
             'paid_date' => $request->input('paid_date'),
-            'time_total' => $request->input('time_total'),
             'bill_status' => $request->input('bill_status'),
+            'invoice_id' => $invoice_id
         ])->get();
         return response()->json(array(
             'data' => $bill
         ));
     }
 
-    public function showPaidOnly($bills_id)
+    public function totalTime($id)
     {
-        $bill = Bill::findOrFail($bills_id)
+        $time_total = Invoice::findOrFail($id)
+        // $time_total = DB::table('invoices')
+                        ->where('id', '=', $id)
+                        ->get();
+        //เวลาเรียกผ่านตัวแปรอื่นใน invoices ใช้ invoices_id น้า 
+        return response()->json($time_total);
+    }
+
+    public function showWaitingToPayOnly($id)
+    {
+        $bill = Bill::findOrFail($id)
+                    ->where('bill_status', '=', 'waiting to pay')
+                    ->get();
+        return response()->json(array(
+            'data' => $bill
+        ));
+    }
+
+    public function showPaidOnly($id)
+    {
+        $bill = Bill::findOrFail($id)
                     ->where('bill_status', '=', 'paid')
                     ->get();
         return response()->json(array(
@@ -49,8 +58,8 @@ class BillController extends Controller
         ));
     }
 
-    public function updateStatusBill(Request $request, $bills_id){
-        $bill = Bill::findOrFail($bills_id);
+    public function updateStatusBill(Request $request, $id){
+        $bill = Bill::findOrFail($id);
         $bill->bill_status = $request->input('bill_status');
         $bill->save();
         

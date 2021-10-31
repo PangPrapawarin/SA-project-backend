@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\AppraisalController;
 use App\Http\Controllers\Api\BillController;
 use App\Http\Controllers\Api\InvoiceController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\WarrantyController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -28,6 +29,11 @@ Route::get('/user/{id}', [UserController::class], 'getUser');
 Route::post('/user/create-employee', [UserController::class], 'create');
 Route::post('/user/remove-employee', [UserController::class], 'destroy');
 
+//Warranty route
+Route::get('/warranty/{serial_number}', [WarrantyController::class], 'getWarranty');
+Route::post('/warranty/create-warranty/{warranty_id}', [WarrantyController::class], 'create'); //ไม่น่าต้องใช้นะเพราะเราไม่สร้าง warranty
+Route::post('/warranty/remove-warranty', [WarrantyController::class], 'destroy');
+
 //Appraisal route
 Route::get('/appraisal/waiting', [AppraisalController::class, 'showWaitingWork']);
 Route::get('/appraisal/confirmed', [AppraisalController::class, 'showConfirmWork']);
@@ -41,6 +47,7 @@ Route::post('/invoice/update-status', [InvoiceController::class], 'updateStatusW
 
 //Bill route
 Route::get('/bill/paid/{id}', [BillController::class, 'showPaidOnly']);
+Route::get('/bill/paid/{id}', [BillController::class, 'showWaitingToPayOnly']);
 Route::get('/bill/total-time', [BillController::class], 'totalTime');
-Route::post('/bill/not-paid/{id}', [BillController::class], 'showBeforePay');
+Route::post('/bill/not-paid/{id}', [BillController::class], 'create');
 Route::post('/bill/status-bill/{id}', [BillController::class], 'updateStatusBill');

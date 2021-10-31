@@ -23,8 +23,7 @@ class CreateBillsTable extends Migration
             ->on('invoices')
             ->cascadeOnDelete();
 
-            $table->date('paid_date');
-            $table->integer('time_total');
+            $table->dateTime('paid_date');
             $table->string('bill_status')->default('waiting to pay');
         });
     }

@@ -15,8 +15,8 @@ class CreateWarrantiesTable extends Migration
     {
         Schema::create('warranties', function (Blueprint $table) {
             $table->id();
-            $table->dateTime('warranty_start_date');
-            $table->dateTime('warranty_end_date');
+            $table->date('warranty_start_date');
+            $table->date('warranty_end_date');
             $table->string('customer_name');
             
             $table->string('product_id');
