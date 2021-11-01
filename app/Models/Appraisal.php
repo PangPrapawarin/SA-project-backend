@@ -16,13 +16,13 @@ class Appraisal extends Model
         'price',
         'appraisal_status',
         'detail',
-        'serial_number'
+        'warranties_id'
     ];
 
     public function invoice() {
-        return $this->belongsTo(Invoice::class);
+        return $this->hasOne(Invoice::class);
     }
     public function warranty() {
-        return $this->hasOne(Warranty::class);
+        return $this->belongsTo(Warranty::class);
     }
 }

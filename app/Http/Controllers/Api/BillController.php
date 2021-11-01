@@ -21,7 +21,7 @@ class BillController extends Controller
         $bill = Bill::create([
             'paid_date' => $request->input('paid_date'),
             'bill_status' => $request->input('bill_status'),
-            'invoice_id' => $invoice_id
+            'invoices_id' => $invoice_id
         ])->get();
         return response()->json(array(
             'data' => $bill

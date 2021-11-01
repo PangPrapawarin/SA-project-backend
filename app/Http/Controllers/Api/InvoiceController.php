@@ -19,7 +19,7 @@ class InvoiceController extends Controller
             'end_fix' => $request->input('end_fix'),
             'invoice_status' => $request->input('invoice_status'),
             'employee_id' => $employee_id,
-            'appraisal_id' => $appraisal_id
+            'appraisals_id' => $appraisal_id
         ]);
         return 'success';
     }

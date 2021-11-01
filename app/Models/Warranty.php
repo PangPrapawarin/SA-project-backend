@@ -15,14 +15,15 @@ class Warranty extends Model
     protected $fillable = [
         'warranty_start_date',
         'warranty_end_date',
-        'customer_name'
+        'customer_name',
+        'product_id'
     ];
 
     public function appraisal() {
-        return $this->belongsTo(Appraisal::class);
+        return $this->hasOne(Appraisal::class);
     }
     public function product() {
-        return $this->hasOne(Product::class);
+        return $this->belongsTo(Product::class);
     }
 }
 

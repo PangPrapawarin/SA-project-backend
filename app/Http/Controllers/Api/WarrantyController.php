@@ -29,6 +29,12 @@ class WarrantyController extends Controller
                     ->get();
         return $warranty;
     }
+    public function showWarranty()
+    {
+        $warranties= DB::table('warranties')->get();
+        return response()->json($warranties);
+    }
+
 
     public function destroy(Request $request)
     {
