@@ -19,7 +19,7 @@ class CreateWarrantiesTable extends Migration
             $table->date('warranty_end_date');
             $table->string('customer_name');
             
-            $table->string('product_id');
+            $table->unsignedBigInteger('product_id');
             $table->foreign('product_id')
                 ->references('id')
                 ->on('products')

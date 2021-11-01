@@ -47,7 +47,7 @@ Route::post('/invoice/update-status', [InvoiceController::class], 'updateStatusW
 
 //Bill route
 Route::get('/bill/paid/{id}', [BillController::class, 'showPaidOnly']);
-Route::get('/bill/paid/{id}', [BillController::class, 'showWaitingToPayOnly']);
+Route::get('/bill/waiting-to-pay/{id}', [BillController::class, 'showWaitingToPayOnly']);
 Route::get('/bill/total-time', [BillController::class], 'totalTime');
 Route::post('/bill/not-paid/{id}', [BillController::class], 'create');
 Route::post('/bill/status-bill/{id}', [BillController::class], 'updateStatusBill');

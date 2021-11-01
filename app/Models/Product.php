@@ -14,10 +14,11 @@ class Product extends Model
     protected $fillable = [
         'model',
         'color',
-        'serial_number'
+        'serial_number',
+        'product_name'
     ];
 
     public function warranty() {
-        return $this->belongsTo(Warranty::class);
+        return $this->hasOne(Warranty::class);
     }
 }
