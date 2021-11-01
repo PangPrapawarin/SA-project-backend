@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\BillController;
 use App\Http\Controllers\Api\InvoiceController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\WarrantyController;
+use App\Http\Controllers\Api\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -54,3 +55,6 @@ Route::get('/bill/waiting-to-pay/{id}', [BillController::class, 'showWaitingToPa
 Route::get('/bill/total-time', [BillController::class], 'totalTime');
 Route::post('/bill/not-paid/{id}', [BillController::class], 'create');
 Route::post('/bill/status-bill/{id}', [BillController::class], 'updateStatusBill');
+
+//Product route
+Route::get('/product/show', [ProductController::class, 'showProduct']);
