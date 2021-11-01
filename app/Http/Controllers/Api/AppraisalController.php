@@ -23,6 +23,12 @@ class AppraisalController extends Controller
             return 'success';
     }
 
+    public function showWork()
+    {
+        $appraisal = DB::table('appraisals')->get();
+        return response()->json($appraisal);
+    }
+
     public function showWaitingWork()
     {
         $appraisal = DB::table('appraisals')

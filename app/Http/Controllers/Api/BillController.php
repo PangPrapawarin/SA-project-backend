@@ -28,6 +28,12 @@ class BillController extends Controller
         ));
     }
 
+    public function showBill()
+    {
+        $appraisal = DB::table('billls')->get();
+        return response()->json($appraisal);
+    }
+
     public function totalTime($id)
     {
         $time_total = Invoice::findOrFail($id)
