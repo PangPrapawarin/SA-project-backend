@@ -6,29 +6,43 @@ use App\Http\Controllers\Controller;
 use App\Models\Bill;
 use App\Models\Invoice;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BillController extends Controller
 {
-    public function totalTime($id)
+    // public function __construct()
+    // {
+    //     $this->middleware('auth:api');    
+    // }
+
+    public function create(Request $request, $invoice_id)
     {
-        $time_total = Invoice::findOrFail($id);
+        Invoice::findOrFail($invoice_id);
+        $bill = Bill::create([
+            'paid_date' => $request->input('paid_date'),
+            'bill_status' => $request->input('bill_status'),
+            'invoices_id' => $invoice_id
+        ])->get();
         return response()->json(array(
-            'data' => $time_total
+            'data' => $bill
         ));
     }
 
-    public function showBeforePay(Request $request, $id)
+    public function totalTime($id)
     {
-        $invoice = Invoice::findOrFail($id);
-        $date_of_repair = $invoice->date_of_repair;
-        $employee_name = $invoice->employee_name;
-        $bill = Bill::create([
-            'paid_date' => $request->input('paid_date'),
-            'time_total' => $request->input('time_total'),
-            'bill_status' => $request->input('bill_status'),
-            'date_of_repair' => $date_of_repair,
-            'employee_name' => $employee_name
-        ])->get();
+        $time_total = Invoice::findOrFail($id)
+        // $time_total = DB::table('invoices')
+                        ->where('id', '=', $id)
+                        ->get();
+        //เวลาเรียกผ่านตัวแปรอื่นใน invoices ใช้ invoices_id น้า 
+        return response()->json($time_total);
+    }
+
+    public function showWaitingToPayOnly($id)
+    {
+        $bill = Bill::findOrFail($id)
+                    ->where('bill_status', '=', 'waiting to pay')
+                    ->get();
         return response()->json(array(
             'data' => $bill
         ));
@@ -48,13 +62,6 @@ class BillController extends Controller
         $bill = Bill::findOrFail($id);
         $bill->bill_status = $request->input('bill_status');
         $bill->save();
-
-        // if ($bill->bill_status == 'paid'){
-        //     $sql_bill_type = $bill->type."_left";
-
-        //     DB::update("update bill set ".$sql_bill_type." = ".$sql_bill_type. "- ".$bill->bill_status." where id = ".$bill->id);
-
-        // }
         
         return "update success";
     }

@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Bill;
+use App\Models\Invoice;
 
 class Appraisal extends Model
 {
@@ -13,11 +15,12 @@ class Appraisal extends Model
     protected $fillable = [
         'price',
         'appraisal_status',
-        'detail'
+        'detail',
+        'warranties_id'
     ];
 
     public function invoice() {
-        return $this->hasMany(Invoice::class);
+        return $this->hasOne(Invoice::class);
     }
     public function warranty() {
         return $this->belongsTo(Warranty::class);

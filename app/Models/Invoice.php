@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Bill;
+use App\Models\Appraisal;
+use App\Models\User;
 
 class Invoice extends Model
 {
@@ -14,13 +17,18 @@ class Invoice extends Model
         'date_of_repair',
         'start_fix',
         'end_fix',
-        'invoice_status'
+        'invoice_status',
+        'employee_id',
+        'appraisals_id'
     ];
 
-    public function bill() {
-        return $this->hasMany(Bill::class);
-    }
+    // public function bill() {
+    //     return $this->hasOne(Bill::class);
+    // }
     public function appraisal() {
         return $this->belongsTo(Appraisal::class);
+    }
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 }

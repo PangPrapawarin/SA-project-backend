@@ -14,18 +14,17 @@ class CreateBillsTable extends Migration
     public function up()
     {
         Schema::create('bills', function (Blueprint $table) {
-            $table->foreign('id')
+            $table->id();
+            $table->timestamps();
+
+            $table->unsignedBigInteger('invoices_id');
+            $table->foreign('invoices_id')
             ->references('id')
-            ->on('invoices');
-            $table->timestamps('paid_date');
-            $table->integer('time_total');
+            ->on('invoices')
+            ->cascadeOnDelete();
+
+            $table->dateTime('paid_date');
             $table->string('bill_status')->default('waiting to pay');
-            $table->foreign('date_of_repair')
-            ->references('date_of_repair')
-            ->on('invoices');
-            $table->foreign('employee_name')
-            ->references('employee_name')
-            ->on('invoices');
         });
     }
 
