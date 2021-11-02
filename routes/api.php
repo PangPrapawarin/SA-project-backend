@@ -31,7 +31,7 @@ Route::post('/user/create-employee', [UserController::class], 'create');
 Route::post('/user/remove-employee', [UserController::class], 'destroy');
 
 //Warranty route
-Route::get('/warranty/show', [WarrantyController::class], 'showWarranty');
+Route::get('/warranty/show', [WarrantyController::class, 'showWarranty']);
 Route::get('/warranty/{serial_number}', [WarrantyController::class], 'getWarranty');
 Route::post('/warranty/create-warranty/{warranty_id}', [WarrantyController::class], 'create'); //ไม่น่าต้องใช้นะเพราะเราไม่สร้าง warranty
 Route::post('/warranty/remove-warranty', [WarrantyController::class], 'destroy');
