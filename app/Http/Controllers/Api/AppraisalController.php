@@ -58,4 +58,13 @@ class AppraisalController extends Controller
 
         return "update success";
     }
+
+    public function updateDetailAppraisal(Request $request, $id){
+        $appraisal = Appraisal::findOrFail($id);
+        $appraisal->price = $request->input('price');
+        $appraisal->detail = $request->input('detail');
+        $appraisal->save();
+
+        return "update success";
+    }
 }

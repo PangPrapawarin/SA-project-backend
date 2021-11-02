@@ -42,6 +42,7 @@ Route::get('/appraisal/waiting', [AppraisalController::class, 'showWaitingWork']
 Route::get('/appraisal/confirmed', [AppraisalController::class, 'showConfirmWork']);
 Route::post('/appraisal/create-appraisal/{id}', [AppraisalController::class, 'create']);
 Route::post('/appraisal/update-status/{id}', [AppraisalController::class, 'updateStatusAppraisal']);
+Route::post('/appraisal/update-detail/{id}', [AppraisalController::class, 'updateDetailAppraisal']);
 
 //Invoice route
 Route::get('/invoice/all-works', [InvoiceController::class, 'show']);
