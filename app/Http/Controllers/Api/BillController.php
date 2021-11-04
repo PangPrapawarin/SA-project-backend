@@ -10,22 +10,15 @@ use Illuminate\Support\Facades\DB;
 
 class BillController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->middleware('auth:api');    
-    // }
 
-    public function create(Request $request, $invoice_id)
+    public function create(Request $request)
     {
-        Invoice::findOrFail($invoice_id);
-        $bill = Bill::create([
-            'paid_date' => $request->input('paid_date'),
+        $bill = [
+            'appraisals_id' => $request->input('appraisals_id'),
             'bill_status' => $request->input('bill_status'),
-            'invoices_id' => $invoice_id
-        ])->get();
-        return response()->json(array(
-            'data' => $bill
-        ));
+        ];
+        Bill::create($bill);
+        return "success";
     }
 
     public function showBill()

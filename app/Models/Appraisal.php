@@ -20,9 +20,12 @@ class Appraisal extends Model
     ];
 
     public function invoice() {
-        return $this->hasOne(Invoice::class);
+        return $this->hasMany(Invoice::class);
     }
     public function warranty() {
         return $this->belongsTo(Warranty::class);
+    }
+    public function bill() {
+        return $this->hasOne(Bill::class);
     }
 }

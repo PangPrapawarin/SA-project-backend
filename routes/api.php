@@ -20,10 +20,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
-
 //User route
 Route::get('/user/all-users', [UserController::class, 'show']);
 Route::get('/user/{id}', [UserController::class], 'getUser');
@@ -46,7 +42,7 @@ Route::post('/appraisal/update-detail/{id}', [AppraisalController::class, 'updat
 
 //Invoice route
 Route::get('/invoice/all-works', [InvoiceController::class, 'show']);
-Route::post('/invoice/create-work', [InvoiceController::class], 'create');
+Route::post('/invoice/create-work', [InvoiceController::class, 'create']);
 Route::post('/invoice/update-status', [InvoiceController::class], 'updateStatusWork');
 Route::post('/invoice/update-date', [InvoiceController::class], 'updateDateWork');
 
@@ -55,8 +51,8 @@ Route::get('/bill/show', [BillController::class, 'showBill']);
 Route::get('/bill/paid/{id}', [BillController::class, 'showPaidOnly']);
 Route::get('/bill/waiting-to-pay/{id}', [BillController::class, 'showWaitingToPayOnly']);
 Route::get('/bill/total-time', [BillController::class], 'totalTime');
-Route::post('/bill/not-paid/{id}', [BillController::class], 'create');
-Route::post('/bill/status-bill/{id}', [BillController::class], 'updateStatusBill');
+Route::post('/bill/create', [BillController::class, 'create']);
+Route::post('/bill/status-bill/{id}', [BillController::class, 'updateStatusBill']);
 
 //Product route
 Route::get('/product/show', [ProductController::class, 'showProduct']);

@@ -23,7 +23,6 @@ class CreateBillsTable extends Migration
             ->on('appraisals')
             ->cascadeOnDelete();
 
-            $table->dateTime('paid_date');
             $table->string('bill_status')->default('waiting to pay');
         });
     }

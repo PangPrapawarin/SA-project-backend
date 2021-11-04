@@ -11,15 +11,14 @@ use Illuminate\Support\Facades\DB;
 
 class InvoiceController extends Controller
 {
-    public function create(Request $request, $employee_id, $appraisal_id)
+    public function create(Request $request)
     {
         Invoice::create([
-            'date_of_repair' => $request->input('date_of_repair'),
             'start_fix' => $request->input('start_fix'),
             'end_fix' => $request->input('end_fix'),
             'invoice_status' => $request->input('invoice_status'),
-            'employee_id' => $employee_id,
-            'appraisals_id' => $appraisal_id
+            'employee_id' => $request->input('employee_id'),
+            'appraisals_id' => $request->input('appraisals_id')
         ]);
         return 'success';
     }

@@ -14,23 +14,7 @@ class BillsTableSeeder extends Seeder
      */
     public function run()
     {
-        $bills = [
-            [
-                'paid_date' => "2021-10-31 21:22:13",
-                'bill_status' => 'waiting to pay',
-                'appraisals_id' => 1,
-            ],
-            [
-                'paid_date' => "2021-09-10 21:22:13",
-                'bill_status' => 'paid',
-                'appraisals_id' => 2,
-            ],
-            [
-                'paid_date' => "2021-10-22 21:22:13",
-                'bill_status' => 'waiting to pay',
-                'appraisals_id' => 3,
-            ]
-        ];
+        $bills = [];
 
         foreach ($bills as $bill) {
             Bill::create($bill);

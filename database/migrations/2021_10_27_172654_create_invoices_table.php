@@ -16,7 +16,6 @@ class CreateInvoicesTable extends Migration
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->date('date_of_repair');
             $table->date('start_fix');
             $table->date('end_fix');
             $table->string('invoice_status')->default('in progress');

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Invoice;
+use App\Models\Appraisal;
 
 class Bill extends Model
 {
@@ -12,12 +12,11 @@ class Bill extends Model
     protected $table = 'bills';
 
     protected $fillable = [
-        'paid_date',
         'bill_status',
-        'invoices_id'
+        'appraisals_id'
     ];
 
-    public function invoice() {
-        return $this->hasOne(Invoice::class);
+    public function appraisal() {
+        return $this->belongsTo(Appraisal::class);
     }
 }
