@@ -17,7 +17,6 @@ class Invoice extends Model
         'date_of_repair',
         'start_fix',
         'end_fix',
-        'invoice_status',
         'employee_id',
         'appraisals_id'
     ];

@@ -18,7 +18,6 @@ class CreateInvoicesTable extends Migration
             $table->timestamps();
             $table->date('start_fix');
             $table->date('end_fix');
-            $table->string('invoice_status')->default('in progress');
 
             $table->unsignedBigInteger('employee_id');
             $table->foreign('employee_id')

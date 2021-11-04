@@ -16,7 +16,6 @@ class InvoiceController extends Controller
         Invoice::create([
             'start_fix' => $request->input('start_fix'),
             'end_fix' => $request->input('end_fix'),
-            'invoice_status' => $request->input('invoice_status'),
             'employee_id' => $request->input('employee_id'),
             'appraisals_id' => $request->input('appraisals_id')
         ]);
