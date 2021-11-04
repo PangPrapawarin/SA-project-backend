@@ -17,10 +17,10 @@ class CreateBillsTable extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->unsignedBigInteger('invoices_id');
-            $table->foreign('invoices_id')
+            $table->unsignedBigInteger('appraisals_id');
+            $table->foreign('appraisals_id')
             ->references('id')
-            ->on('invoices')
+            ->on('appraisals')
             ->cascadeOnDelete();
 
             $table->dateTime('paid_date');

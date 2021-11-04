@@ -11,15 +11,16 @@ class UserController extends Controller
 {
     public function create(Request $request)
     {
-        User::create([
+        $user = [
             'name' => $request->input('name'),
             'address' => $request->input('address'),
             'sex' => $request->input('sex'),
             'salary' => $request->input('salary'),
             'phone' => $request->input('phone'),
             'email' => $request->input('email'),
-        ]);
-        return 'success';
+        ];
+        User::create($user);
+        return "success";
     }
 
     public function show()

@@ -42,4 +42,13 @@ class InvoiceController extends Controller
         
         return "update success";
     }
+
+    public function updateDateWork(Request $request, $id){
+        $invoice = Invoice::findOrFail($id);
+        $invoice->start_fix = $request->input('start_fix');
+        $invoice->end_fix = $request->input('end_fix');
+        $invoice->save();
+        
+        return "update success";
+    }
 }

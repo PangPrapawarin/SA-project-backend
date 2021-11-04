@@ -30,8 +30,8 @@ class BillController extends Controller
 
     public function showBill()
     {
-        $appraisal = DB::table('billls')->get();
-        return response()->json($appraisal);
+        $bill = DB::table('bills')->get();
+        return response()->json($bill);
     }
 
     public function totalTime($id)

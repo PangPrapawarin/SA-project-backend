@@ -20,14 +20,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
 //User route
 Route::get('/user/all-users', [UserController::class, 'show']);
 Route::get('/user/{id}', [UserController::class], 'getUser');
-Route::post('/user/create-employee', [UserController::class], 'create');
+Route::post('/user/create-employee', [UserController::class, 'create']);
 Route::post('/user/remove-employee', [UserController::class], 'destroy');
 
 //Warranty route
@@ -48,6 +48,7 @@ Route::post('/appraisal/update-detail/{id}', [AppraisalController::class, 'updat
 Route::get('/invoice/all-works', [InvoiceController::class, 'show']);
 Route::post('/invoice/create-work', [InvoiceController::class], 'create');
 Route::post('/invoice/update-status', [InvoiceController::class], 'updateStatusWork');
+Route::post('/invoice/update-date', [InvoiceController::class], 'updateDateWork');
 
 //Bill route
 Route::get('/bill/show', [BillController::class, 'showBill']);
